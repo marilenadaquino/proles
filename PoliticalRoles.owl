@@ -1,0 +1,505 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY proles "http://www.essepuntato.it/2013/10/politicalroles/" >
+]>
+
+
+<rdf:RDF xmlns="http://www.essepuntato.it/2013/10/politicalroles#"
+     xml:base="http://www.essepuntato.it/2013/10/politicalroles"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:proles="http://www.essepuntato.it/2013/10/politicalroles/">
+    <owl:Ontology rdf:about="http://www.essepuntato.it/2013/10/politicalroles">
+        <owl:versionInfo>1.0</owl:versionInfo>
+        <dc:creator>Silvio Peroni</dc:creator>
+        <dc:date>25/11/2013</dc:date>
+        <dc:creator>Marilena Daquino
+
+</dc:creator>
+        <owl:imports rdf:resource="http://purl.org/spar/pro/"/>
+        <owl:versionIRI rdf:resource="&proles;1.0"/>
+        <owl:imports rdf:resource="http://www.ontologydesignpatterns.org/cp/owl/naryparticipation.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/describesAgent -->
+
+    <owl:ObjectProperty rdf:about="&proles;describesAgent">
+        <rdfs:label xml:lang="en">describes agent</rdfs:label>
+        <rdfs:comment xml:lang="en">A property relating a source to agents who are described in the source.</rdfs:comment>
+        <rdfs:domain rdf:resource="&proles;Source"/>
+        <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="&proles;describesSituation"/>
+            <rdf:Description rdf:about="http://purl.org/spar/pro/relatesToOrganization"/>
+        </owl:propertyChainAxiom>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="&proles;describesSituation"/>
+            <rdf:Description rdf:about="http://purl.org/spar/pro/isHeldBy"/>
+        </owl:propertyChainAxiom>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="&proles;describesSituation"/>
+            <rdf:Description rdf:about="&proles;includesAgent"/>
+        </owl:propertyChainAxiom>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="&proles;describesSituation"/>
+            <rdf:Description rdf:about="http://purl.org/spar/pro/relatesToPerson"/>
+        </owl:propertyChainAxiom>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/describesSituation -->
+
+    <owl:ObjectProperty rdf:about="&proles;describesSituation">
+        <rdfs:label xml:lang="en">describes situation</rdfs:label>
+        <rdfs:comment xml:lang="en">A property relating sources and situations described in that source.</rdfs:comment>
+        <rdfs:domain rdf:resource="&proles;Source"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/cp/owl/situation.owl#Situation"/>
+        <owl:inverseOf rdf:resource="http://www.w3.org/ns/prov#hadPrimarySource"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/hasRelatedAgent -->
+
+    <owl:ObjectProperty rdf:about="&proles;hasRelatedAgent">
+        <rdfs:label xml:lang="en">has related agent</rdfs:label>
+        <rdfs:comment xml:lang="en">A property relating agents.</rdfs:comment>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.org/spar/pro/isRelatedToRoleInTime"/>
+            <rdf:Description rdf:about="http://purl.org/spar/pro/isHeldBy"/>
+        </owl:propertyChainAxiom>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="&proles;holdsPoliticalRoleInTime"/>
+            <rdf:Description rdf:about="http://purl.org/spar/pro/relatesToPerson"/>
+        </owl:propertyChainAxiom>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&proles;Place"/>
+                    <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/Agent"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/Organization"/>
+                    <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/Person"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="&proles;holdsPoliticalRoleInTime"/>
+            <rdf:Description rdf:about="http://purl.org/spar/pro/relatesToOrganization"/>
+        </owl:propertyChainAxiom>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/hasRelatedSource -->
+
+    <owl:ObjectProperty rdf:about="&proles;hasRelatedSource">
+        <rdfs:label xml:lang="en">has related source</rdfs:label>
+        <rdfs:comment xml:lang="en">A property relating agents and sources that attest some information about agents&apos; relations.</rdfs:comment>
+        <rdfs:range rdf:resource="&proles;Source"/>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="&proles;holdsPoliticalRoleInTime"/>
+            <rdf:Description rdf:about="http://www.w3.org/ns/prov#hadPrimarySource"/>
+        </owl:propertyChainAxiom>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&proles;Place"/>
+                    <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/Agent"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://purl.org/spar/pro/isRelatedToRoleInTime"/>
+            <rdf:Description rdf:about="http://www.w3.org/ns/prov#hadPrimarySource"/>
+        </owl:propertyChainAxiom>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="&proles;isIncludedInParticipationWithPoliticalRole"/>
+            <rdf:Description rdf:about="http://www.w3.org/ns/prov#hadPrimarySource"/>
+        </owl:propertyChainAxiom>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/holdsPoliticalRoleInTime -->
+
+    <owl:ObjectProperty rdf:about="&proles;holdsPoliticalRoleInTime">
+        <rdfs:label xml:lang="en">holds political role in time</rdfs:label>
+        <rdfs:comment xml:lang="en">A property relating an agent to a situation that represents agents holding a political role or political relation in a period of time.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/spar/pro/holdsRoleInTime"/>
+        <rdfs:range rdf:resource="&proles;PoliticalRoleInTime"/>
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/includesAgent -->
+
+    <owl:ObjectProperty rdf:about="&proles;includesAgent">
+        <rdfs:label>includes agent</rdfs:label>
+        <rdfs:comment>A property relating a situation that describes a context for political relations and the agent involved with a political role.</rdfs:comment>
+        <rdfs:domain rdf:resource="&proles;ParticipationWithPoliticalRole"/>
+        <owl:inverseOf rdf:resource="&proles;isIncludedInParticipationWithPoliticalRole"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/cp/owl/situation.owl#isSettingFor"/>
+        <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/isIncludedInParticipationWithPoliticalRole -->
+
+    <owl:ObjectProperty rdf:about="&proles;isIncludedInParticipationWithPoliticalRole">
+        <rdfs:label>is included in participation with political role</rdfs:label>
+        <rdfs:comment>A property relating an agent to a specific situation in which agent partecipates with a political role described in &apos;Political role in time&apos; class.
+
+</rdfs:comment>
+        <rdfs:range rdf:resource="&proles;ParticipationWithPoliticalRole"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/cp/owl/naryparticipation.owl#isIncludedInParticipation"/>
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/isPlaceContextFor -->
+
+    <owl:ObjectProperty rdf:about="&proles;isPlaceContextFor">
+        <rdfs:label>is place context for</rdfs:label>
+        <rdfs:comment>A property relating a place to the role for which that place provides the context.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/spar/pro/isRelatedToRoleInTime"/>
+        <rdfs:domain rdf:resource="&proles;Place"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/isPoliticalRoleIn -->
+
+    <owl:ObjectProperty rdf:about="&proles;isPoliticalRoleIn">
+        <rdfs:label>is political role in</rdfs:label>
+        <rdfs:comment>The property relating the definition of a specific political role to the time-indexed situation where an agent holds that role.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/spar/pro/isRoleIn"/>
+        <rdfs:domain rdf:resource="&proles;PoliticalRole"/>
+        <rdfs:range rdf:resource="&proles;PoliticalRoleInTime"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/participationIncludesPoliticalRoleInTime -->
+
+    <owl:ObjectProperty rdf:about="&proles;participationIncludesPoliticalRoleInTime">
+        <rdfs:label>participation includes political role in time</rdfs:label>
+        <rdfs:comment>A property relating a situation that describes a context for political relations and a time-indexed situation representing political roles of agents&apos; involved in each situations.</rdfs:comment>
+        <rdfs:domain rdf:resource="&proles;ParticipationWithPoliticalRole"/>
+        <rdfs:range rdf:resource="&proles;PoliticalRoleInTime"/>
+        <rdfs:subPropertyOf rdf:resource="&proles;participationIncludesRoleInTime"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/participationIncludesRoleInTime -->
+
+    <owl:ObjectProperty rdf:about="&proles;participationIncludesRoleInTime">
+        <rdfs:range rdf:resource="http://purl.org/spar/pro/RoleInTime"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/cp/owl/naryparticipation.owl#NaryParticipation"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/cp/owl/naryparticipation.owl#participationIncludes"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/relatesToPlace -->
+
+    <owl:ObjectProperty rdf:about="&proles;relatesToPlace">
+        <rdfs:label>relates to place</rdfs:label>
+        <rdfs:comment>A property relating a time-indexed situation to a place that represents the context for that situation.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/spar/pro/relatesToEntity"/>
+        <rdfs:range rdf:resource="&proles;Place"/>
+        <owl:inverseOf rdf:resource="&proles;isPlaceContextFor"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/withPoliticalRole -->
+
+    <owl:ObjectProperty rdf:about="&proles;withPoliticalRole">
+        <rdfs:label>with political role</rdfs:label>
+        <rdfs:comment>A property relating a time-indexed situation to the political role held by an agent described in that situation.</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/spar/pro/withRole"/>
+        <rdfs:range rdf:resource="&proles;PoliticalRole"/>
+        <rdfs:domain rdf:resource="&proles;PoliticalRoleInTime"/>
+        <owl:inverseOf rdf:resource="&proles;isPoliticalRoleIn"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#hadPrimarySource -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#hadPrimarySource">
+        <rdfs:label xml:lang="en">had primary source</rdfs:label>
+        <rdfs:comment xml:lang="en">A property relating situations and the source that describes them.</rdfs:comment>
+        <rdfs:range rdf:resource="&proles;Source"/>
+        <rdfs:isDefinedBy rdf:resource="http://www.w3.org/TR/prov-o/"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&proles;ParticipationWithPoliticalRole"/>
+                    <rdf:Description rdf:about="&proles;PoliticalRoleInTime"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#wasAttributedTo -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#wasAttributedTo">
+        <rdfs:comment>A property relating situations to an agent responsible for assertions about agents&apos; roles.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.w3.org/TR/prov-o/"/>
+        <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&proles;ParticipationWithPoliticalRole"/>
+                    <rdf:Description rdf:about="&proles;PoliticalRoleInTime"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/ParticipationWithPoliticalRole -->
+
+    <owl:Class rdf:about="&proles;ParticipationWithPoliticalRole">
+        <rdfs:label xml:lang="en">participation with political role</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/cp/owl/naryparticipation.owl#NaryParticipation"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/prov#wasAttributedTo"/>
+                <owl:onClass rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&proles;includesAgent"/>
+                <owl:allValuesFrom rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&proles;participationIncludesPoliticalRoleInTime"/>
+                <owl:allValuesFrom rdf:resource="&proles;PoliticalRoleInTime"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/prov#hadPrimarySource"/>
+                <owl:allValuesFrom rdf:resource="&proles;Source"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">A specific situation in which agents are involved in political relationships and participate in some event. Participation involves agents, political roles in time and other objects: it&apos;s restricted in a period of time, attested in a source and attributed to an editor of the assertion.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/Place -->
+
+    <owl:Class rdf:about="&proles;Place">
+        <rdfs:label xml:lang="en">place</rdfs:label>
+        <rdfs:comment xml:lang="en">Places in which agents act with a political role.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/PoliticalRole -->
+
+    <owl:Class rdf:about="&proles;PoliticalRole">
+        <rdfs:label>political role</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/spar/pro/Role"/>
+        <rdfs:comment xml:lang="en">Roles describing people&apos;s political relations, relationships among politicians and their political roles.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/PoliticalRoleInTime -->
+
+    <owl:Class rdf:about="&proles;PoliticalRoleInTime">
+        <rdfs:label xml:lang="en">political role in time</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://purl.org/spar/pro/RoleInTime"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/spar/pro/withRole"/>
+                <owl:allValuesFrom rdf:resource="&proles;PoliticalRole"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/prov#hadPrimarySource"/>
+                <owl:onClass rdf:resource="&proles;Source"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/ns/prov#wasAttributedTo"/>
+                <owl:onClass rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">A specific situation in which agents are involved in political relationships. All relations should be restricted in a period of time, attested in a source and attributed to an editor of the assertion.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/Source -->
+
+    <owl:Class rdf:about="&proles;Source">
+        <rdfs:label xml:lang="en">source</rdfs:label>
+        <rdfs:comment xml:lang="en">Sources giving some information about people&apos;s roles and context of relations.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/enemy -->
+
+    <owl:NamedIndividual rdf:about="&proles;enemy">
+        <rdf:type rdf:resource="&proles;PoliticalRole"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/friend -->
+
+    <owl:NamedIndividual rdf:about="&proles;friend">
+        <rdf:type rdf:resource="&proles;PoliticalRole"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/influent-person -->
+
+    <owl:NamedIndividual rdf:about="&proles;influent-person">
+        <rdf:type rdf:resource="&proles;PoliticalRole"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/institutional-role -->
+
+    <owl:NamedIndividual rdf:about="&proles;institutional-role">
+        <rdf:type rdf:resource="&proles;PoliticalRole"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/leader -->
+
+    <owl:NamedIndividual rdf:about="&proles;leader">
+        <rdf:type rdf:resource="&proles;PoliticalRole"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/militant -->
+
+    <owl:NamedIndividual rdf:about="&proles;militant">
+        <rdf:type rdf:resource="&proles;PoliticalRole"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/prisoner -->
+
+    <owl:NamedIndividual rdf:about="&proles;prisoner">
+        <rdf:type rdf:resource="&proles;PoliticalRole"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/refugee -->
+
+    <owl:NamedIndividual rdf:about="&proles;refugee">
+        <rdf:type rdf:resource="&proles;PoliticalRole"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.essepuntato.it/2013/10/politicalroles/sympathizer -->
+
+    <owl:NamedIndividual rdf:about="&proles;sympathizer">
+        <rdf:type rdf:resource="&proles;PoliticalRole"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/cp/owl/timeinterval.owl#TimeInterval">
+        <rdfs:comment xml:lang="en">Any period of time in which events and relations are restricted.</rdfs:comment>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/cp/owl/participation.owl#Event">
+        <rdfs:comment xml:lang="en">Every sort of events in wich are involved agents with political role.</rdfs:comment>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+
